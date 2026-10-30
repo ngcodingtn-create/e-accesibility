@@ -4,6 +4,8 @@ import Script from "next/script";
 import Sidebar from "@/components/Sidebar";
 import "./globals.css";
 import "./diagrams.css";
+import "./motion.css";
+import Reveal from "@/components/Reveal";
 
 const plex = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-plex" });
 const plexCond = IBM_Plex_Sans_Condensed({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--font-plex-cond" });
@@ -24,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
         <div className="shell">
           <Sidebar />
+          <Reveal />
           <main className="content">
             <div className="page">
               {children}

@@ -157,7 +157,7 @@ main.content { min-width: 0; padding: 44px clamp(16px, 4vw, 56px) 96px; }
 /* ---------- sections ---------- */
 section.block { display: grid; gap: 20px; }
 .sec-title { display: grid; gap: 6px; }
-.sec-title h2::before { content: ""; display: block; width: 36px; height: 3px; background: var(--ink); margin-bottom: 14px; }
+.sec-title::before { content: ""; display: block; width: 36px; height: 3px; background: var(--ink); margin-bottom: 8px; }
 .prose { max-width: 66ch; display: grid; gap: 14px; color: var(--ink-2); }
 .prose strong { color: var(--ink); }
 .sheet { background: var(--sheet); border: 1px solid var(--rule); padding: 22px; min-width: 0; }

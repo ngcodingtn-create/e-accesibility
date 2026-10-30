@@ -132,7 +132,7 @@ function KnowledgeBase() {
           { t: "Hybrid search", s: "Keywords + meaning + Derja glossary" },
           { t: "/retrieve API", s: "Top 5 passages in force → Derja LLM", solid: true },
         ]} />
-        <p className="callout"><strong>Why by hand?</strong> Idaraty’s robots.txt blocks AI crawlers by name, so the agent never fetches it. Belhaj saves the pages in a normal browser, and only their URLs are committed to the public repository.</p>
+        <p className="callout"><strong>Saved by hand:</strong> Idaraty blocks AI crawlers, so we never scrape it.</p>
       </Section>
       <Section title="What is stored, and how it is searched">
         <div className="two-col">
@@ -140,13 +140,13 @@ function KnowledgeBase() {
           <HybridSearch />
         </div>
       </Section>
-      <Section title="Which version is in force" intro={<p>Every passage carries <span className="mono">valid_from</span>, <span className="mono">valid_to</span> and a <span className="mono">status</span>. Search filters on the date of the question, so a repealed article is never cited as current. The first prototype fills these with defaults; laws and their amendments come next.</p>}>
+      <Section title="Which version is in force" intro={<p>Search keeps only the passages in force on the question’s date.</p>}>
         <div className="sheet scroll-x"><div style={{ minWidth: 640 }}><VersionTimeline /></div></div>
       </Section>
-      <Section title="How the prototype is being built" intro={<p>Belhaj’s coding agent follows the plan in <span className="mono">ai_docs/rag</span>. It first fixes the shared data format, then runs four subagents at once, each owning separate files, so they never collide. Target: working end to end in one to two hours.</p>}>
+      <Section title="How the prototype is being built" intro={<p>One agent, four subagents in parallel: about one to two hours.</p>}>
         <BuildSwimlane />
       </Section>
-      <Section title="How it will be measured" intro={<p>About 15 questions: one per procedure and script, plus three that must return nothing. We report <strong>Hit@1</strong> (right procedure first) and <strong>MRR</strong>, comparing keywords only, meaning only, and hybrid with the glossary. No results yet: they come from the first run.</p>}>
+      <Section title="How it will be measured" intro={<p>≈ 15 questions in four scripts, plus 3 out of scope. No results yet.</p>}>
         <EvalMatrix />
       </Section>
     </>
@@ -173,7 +173,7 @@ function DerjaLLM() {
           </div>
         </div>
       </Section>
-      <Section title="Why a trained router" intro={<p>In the NADI 2026 shared task on Tunisian spoken-language understanding, general LLMs used out of the box recognized intents far less reliably than models fine-tuned on Tunisian data. A small classifier is also faster and gives calibrated confidence, which decides when to hand off.</p>}>
+      <Section title="Why a trained router" intro={<p>Models trained on Tunisian data recognize intents far better than general LLMs.</p>}>
         <div className="sheet">
           <RangeBars title="Tunisian intent detection accuracy" max={100} ticks={[0, 25, 50, 75, 100]} unit="%" rows={[
             { label: "General LLMs, zero-shot", sub: "range across models", from: 29, to: 53, color: "var(--ink-3)", text: "29–53%" },
@@ -199,7 +199,7 @@ function TextChannel() {
   const map: [string, string, string][] = [["3", "ع", "ʿayn"], ["7", "ح", "ḥā’"], ["9", "ق", "qāf"], ["5", "خ", "khā’"], ["8", "غ", "ghayn"], ["2", "ء", "hamza"]];
   return (
     <>
-      <Section title="From Arabizi to one spelling" intro={<p>Tunisians often write Derja in Latin letters, with digits for Arabic sounds that have no Latin letter. The normalizer maps everything to one form: <strong>Derja in Arabic script, French and English in Latin script</strong>, the way official documents write French terms.</p>}>
+      <Section title="From Arabizi to one spelling" intro={<p>Derja in Arabic script; French and English stay in Latin script.</p>}>
         <div className="digits">
           {map.map(([d, a, n]) => (
             <div key={d} className="digit">
@@ -229,7 +229,7 @@ function TextChannel() {
 function Speech() {
   return (
     <>
-      <Section title="Speech synthesis · Ayhem" kicker="VoxCPM2 fine-tuned on Derja, published on Hugging Face" intro={<p>Ayhem fine-tuned OpenBMB’s VoxCPM2 (2.3 billion parameters, 48 kHz output, Apache-2.0) on Tunisian speech and published it as <a href="https://huggingface.co/Code-Quasar/voxcpm-tn">Code-Quasar/voxcpm-tn</a>. It already speaks Derja. All weights were updated, over 147 training steps.</p>}>
+      <Section title="Speech synthesis · Ayhem" kicker="VoxCPM2 fine-tuned on Derja, published on Hugging Face" intro={<p>VoxCPM2 (2.3 B parameters) fine-tuned by Ayhem, published as <a href="https://huggingface.co/Code-Quasar/voxcpm-tn">Code-Quasar/voxcpm-tn</a>.</p>}>
         <Flow color="var(--speech)" nodes={[
           { t: "Derja text", s: "starts with “(Tunisian Dialect)”" },
           { t: "Language model", s: "plans words and rhythm" },
@@ -237,8 +237,12 @@ function Speech() {
           { t: "Diffusion decoder", s: "generates the sound, patch by patch" },
           { t: "48 kHz audio", s: "streamed", solid: true },
         ]} />
+        <div className="patches" aria-label="Audio is generated patch by patch; each patch is fed back to make the next">
+          {Array.from({ length: 12 }, (_, k) => <i key={k} style={{ ["--d" as string]: `${k * 0.35}s` }} />)}
+          <span className="cap">one patch every 0.16 s of speech · each one feeds the next</span>
+        </div>
       </Section>
-      <Section title="The training data" intro={<p>Measured from Ayhem’s dataset <a href="https://huggingface.co/datasets/Code-Quasar/Tn-TTS">Code-Quasar/Tn-TTS</a>: <strong>4,730 clips, about 8.5 hours</strong> of 16 kHz speech, plus 179 validation clips. 75% of training transcripts mix in French or English. Each transcript carries a style tag, which the model can use as style control.</p>}>
+      <Section title="The training data" intro={<p>Measured from <a href="https://huggingface.co/datasets/Code-Quasar/Tn-TTS">Code-Quasar/Tn-TTS</a>: 4,730 clips, ≈ 8.5 h.</p>}>
         <div className="sheet">
           <RangeBars title="Training clips per style tag" max={2800} ticks={[0, 700, 1400, 2100, 2800]} rows={[
             { label: "No style", sub: "(Tunisian Dialect)", from: 0, to: 2649, color: "var(--speech)", text: "2,649" },
@@ -260,9 +264,9 @@ function Speech() {
             </tbody>
           </table>
         </div>
-        <p className="callout"><strong>To improve next:</strong> 86 transcripts contain an invisible character and 1,244 glue Arabic and French words together; the validation clips come from a different kind of speech; 147 steps is probably under one pass over the data. Details in <a href="https://github.com/ngcodingtn-create/e-accesibility/tree/main/ai_docs/tts">ai_docs/tts</a>.</p>
+        <p className="callout"><strong>Next:</strong> clean the transcripts, train longer, run a listening test. <a href="https://github.com/ngcodingtn-create/e-accesibility/tree/main/ai_docs/tts">Details</a></p>
       </Section>
-      <Section title="Speech recognition" intro={<p>Off-the-shelf Whisper fails on Tunisian speech, so it is fine-tuned on open Tunisian data (LinTO ≈ 93 h, TunSwitch ≈ 13 h). The same recognizer then scores the voice automatically: synthesize a sentence, transcribe it, and compare.</p>}>
+      <Section title="Speech recognition" intro={<p>Off-the-shelf Whisper fails on Tunisian speech, so we fine-tune it; the same model then scores the voice.</p>}>
         <div className="sheet">
           <RangeBars title="Word error rate on Tunisian test sets, lower is better" max={100} ticks={[0, 25, 50, 75, 100]} unit="%" rows={[
             { label: "Whisper large-v3, as is", sub: "LinTO paper, 3 test sets", from: 82, to: 94, color: "var(--ink-3)", text: "82–94%" },
@@ -285,7 +289,7 @@ function Speech() {
 function SignLanguage() {
   return (
     <>
-      <Section title="How little data exists" intro={<p>Tunisian Sign Language has no dictionary and no public video corpus. Arabic sign-language datasets are larger but are different languages. So we record our own small vocabulary for administrative services, with Deaf signers.</p>}>
+      <Section title="How little data exists" intro={<p>No Tunisian Sign Language dictionary or video corpus exists.</p>}>
         <div className="sheet">
           <RangeBars title="Number of signs per dataset" max={520} ticks={[0, 100, 200, 300, 400, 500]} rows={[
             { label: "TunSL (Tunisian)", sub: "still images, 7 signers", from: 0, to: 57, color: "var(--sign)", text: "57" },
@@ -311,7 +315,7 @@ function SignLanguage() {
             { t: "Avatar + text", s: "always captioned", solid: true },
           ]} />
         </div>
-        <p className="callout"><strong>Deaf people decide.</strong> The World Federation of the Deaf warns that avatars must not replace human interpreters for high-stakes information. The avatar always shows text and offers a human interpreter; Deaf signers validate every sign.</p>
+        <p className="callout"><strong>Deaf signers validate every sign.</strong> The avatar always shows text and offers a human interpreter.</p>
       </Section>
     </>
   );
@@ -322,7 +326,7 @@ function SignLanguage() {
 function ImprovementLoop() {
   return (
     <>
-      <Section title="The loop" intro={<p>Every turn is logged with consent. The worst sessions (low confidence, rephrased questions, thumbs-down, handoffs, empty retrieval) are labeled by native speakers and Deaf signers. Models retrain, and a frozen test set decides whether the new one ships.</p>}>
+      <Section title="The loop" intro={<p>Log every turn, label the worst, retrain, ship only if better.</p>}>
         <div className="sheet"><LoopCycle /></div>
       </Section>
       <Section title="What each model must beat">
@@ -342,7 +346,7 @@ function ImprovementLoop() {
         </div>
       </Section>
       <Section title="Tools">
-        <p className="prose">All free and self-hosted, so citizen data stays in Tunisia: OpenTelemetry and Langfuse for traces, Postgres, Metabase for the dashboard, Label Studio and CVAT for labeling, MLflow and DVC for models and test sets, GitHub Actions for the gate.</p>
+        <p className="prose">Langfuse · Metabase · Label Studio · MLflow · GitHub Actions, all self-hosted.</p>
       </Section>
     </>
   );

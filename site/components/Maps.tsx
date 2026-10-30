@@ -97,6 +97,10 @@ export function LoopCycle() {
           </g>
         );
       })}
+      <circle r={7} className="loop-dot">
+        <animateMotion dur="10s" repeatCount="indefinite" rotate="auto"
+          path={`M${cx},${cy - ry} A${rx},${ry} 0 1 1 ${cx},${cy + ry} A${rx},${ry} 0 1 1 ${cx},${cy - ry}`} />
+      </circle>
       <text x={cx} y={cy - 8} textAnchor="middle" style={{ fontFamily: "var(--cond)", fontSize: 24, fontWeight: 700 }}>Nothing ships unless</text>
       <text x={cx} y={cy + 22} textAnchor="middle" style={{ fontFamily: "var(--cond)", fontSize: 24, fontWeight: 700 }}>it beats the live model</text>
     </svg>

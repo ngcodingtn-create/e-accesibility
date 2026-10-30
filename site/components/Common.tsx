@@ -60,13 +60,14 @@ export function RangeBars({ rows, max, ticks, unit = "", title }: { rows: Row[];
       {rows.map((r, i) => {
         const y = top + i * rowH;
         const x0 = x(r.from), x1 = Math.max(x(r.to), x0 + 3);
+        const inside = x1 + 70 > R;
         return (
           <g key={r.label}>
             <text x={0} y={y + 22} style={{ fontSize: 15, fontWeight: 600 }}>{r.label}</text>
             {r.sub && <text x={0} y={y + 41} className="t-muted" style={{ fontSize: 12.5 }}>{r.sub}</text>}
             <rect x={L} y={y + 12} width={R - L} height={22} fill="var(--field)" />
             <rect x={x0} y={y + 12} width={x1 - x0} height={22} fill={r.color} />
-            <text x={Math.min(x1 + 8, R - 4)} y={y + 28} textAnchor={x1 + 8 > R - 60 ? "end" : "start"} style={{ fontSize: 14, fontWeight: 600, fill: x1 + 8 > R - 60 ? "var(--sheet)" : "var(--ink)" }}>{r.text}</text>
+            <text x={inside ? x1 - 8 : x1 + 8} y={y + 28} textAnchor={inside ? "end" : "start"} style={{ fontSize: 14, fontWeight: 600, fill: inside ? "var(--sheet)" : "var(--ink)" }}>{r.text}</text>
           </g>
         );
       })}
@@ -80,7 +81,7 @@ export function Flow({ nodes, color }: { nodes: { t: string; s?: string; solid?:
     <div className="flow">
       {nodes.map((n, i) => (
         <div key={n.t} style={{ display: "contents" }}>
-          <div className={`node${n.solid ? " solid" : ""}`} style={{ ["--c" as string]: n.c ?? color }}>
+          <div className={`node${n.solid ? " solid" : ""}`} data-reveal style={{ ["--c" as string]: n.c ?? color, ["--i" as string]: i }}>
             <b>{n.t}</b>
             {n.s && <span>{n.s}</span>}
           </div>

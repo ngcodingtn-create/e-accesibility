@@ -39,8 +39,8 @@ export function Section({ kicker, title, children, intro }: { kicker?: string; t
   return (
     <section className="block">
       <div className="sec-title">
-        <h2>{title}</h2>
         {kicker && <span className="label">{kicker}</span>}
+        <h2>{title}</h2>
       </div>
       {intro && <div className="prose">{intro}</div>}
       {children}
