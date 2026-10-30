@@ -1,6 +1,6 @@
 # RAG research notes (30 Oct 2026)
 
-This is background for the choices in [01_spec.md](01_spec.md). Each item is tagged:
+Optional background for the choices in [PLAN.md](PLAN.md). The prototype does not need it. Each item is tagged:
 
 - **[W]**: checked on the web on 30 Oct 2026.
 - **[M]**: from memory. Confirm it before you rely on it.

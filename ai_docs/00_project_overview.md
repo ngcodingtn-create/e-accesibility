@@ -42,15 +42,15 @@ services/asr/       Derja speech recognition            (Med Amine)
 services/web/       accessible front end                (Med Amine)
 ```
 
-Each service is a self-contained Python project (or JS for `web`) with its own README, tests and dependencies. Services talk over HTTP with JSON, and the contracts live in `ai_docs/<service>/03_api_contract.md`.
+Each service is a self-contained Python project (or JS for `web`) with its own README, tests and dependencies. Services talk over HTTP with JSON, and the contracts live in `ai_docs/<service>/API.md`.
 
 ## Rules every agent follows
 
 1. **Never invent legal or procedural content.** Every fact about a procedure must come from a source document that is stored in the repo with its URL and retrieval date. If a source cannot be fetched, stop and ask the human owner to provide it.
-2. **Work only inside your own service folder**, plus your `ai_docs/<service>/PROGRESS.md`. Do not edit other services or other docs.
-3. **Do not change an API contract on your own.** Propose the change in `PROGRESS.md` and ask the owner.
+2. **Work only inside your own service folder.** Do not edit other services or `ai_docs/`.
+3. **Do not change an API contract on your own.** Propose the change in your pull request and ask the owner.
 4. **Work on a branch and open a pull request. Never push to `main`, and never merge.**
-5. **Respect source websites**: read robots.txt and the terms of use, rate-limit to at most one request every 2 seconds, and cache raw pages so each is fetched once.
+5. **Do not crawl government websites.** Idaraty's robots.txt blocks AI crawlers. Source pages are saved by hand by the human owner and committed to the repo.
 6. **Use only licenses we can deploy.** Prefer Apache-2.0 or MIT models and libraries. Non-commercial (NC) models may be used only as evaluation baselines, and must be labeled as such.
 7. **Do not commit personal data or secrets.** No real citizen data, and no API keys. Use `.env` files, listed in `.gitignore`.
 
