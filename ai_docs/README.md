@@ -12,4 +12,8 @@ Read in this order:
      - [API.md](rag/API.md): the HTTP interface the Derja LLM calls (do not change it without asking)
      - [background_research.md](rag/background_research.md): optional; sources and reasoning for later milestones
 
-Other workstreams (TTS by Ayhem, LLM / ASR / sign / UI / MLOps by Med Amine) will get their own folders here.
+   - [tts/](tts/): Derja speech synthesis (owner: **Ayhem**)
+     - [README.md](tts/README.md): everything done so far — the VoxCPM2 fine-tune, the Tn-TTS dataset, measured statistics, gaps and next steps
+     - [API.md](tts/API.md): the proposed HTTP interface for synthesis
+
+Med Amine's workstreams (LLM / ASR / sign / UI / MLOps) will get their own folders here.

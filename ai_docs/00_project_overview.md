@@ -27,7 +27,7 @@ sign  ─► sign recog ─┘    request      (route, tools,  answer  ├─►
 
 | Owner | Workstream | Status (30 Oct 2026) |
 |---|---|---|
-| **Ayhem** | Derja speech synthesis (VoxCPM fine-tune) | Working prototype, quality being improved |
+| **Ayhem** | Derja speech synthesis (VoxCPM fine-tune) | In progress: VoxCPM2 fine-tune published ([Code-Quasar/voxcpm-tn](https://huggingface.co/Code-Quasar/voxcpm-tn)), trained on ≈ 8.5 h ([Code-Quasar/Tn-TTS](https://huggingface.co/datasets/Code-Quasar/Tn-TTS)); evaluation next (`ai_docs/tts/`) |
 | **Belhaj** | Knowledge base: sources, parsing, chunking + versioning, hybrid retrieval | Minimal prototype starting (this folder: `ai_docs/rag/`) |
 | **Med Amine** | Arabizi normalizer, Derja ASR, Derja LLM + grounding, sign channel, accessible UI, MLOps loop, integration | Research and architecture done, build starts with the text spine |
 
