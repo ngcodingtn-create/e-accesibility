@@ -30,3 +30,6 @@ venv/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Saved government pages: not redistributed (public repo)
+services/rag/data/raw/*.html

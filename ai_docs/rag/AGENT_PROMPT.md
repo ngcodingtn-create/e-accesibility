@@ -12,6 +12,7 @@ You are the coding agent for **Belhaj**, who owns the knowledge base (RAG) of ou
 
 Goal: a **minimal RAG prototype, working end to end on a few documents, as fast as possible**. Do not build anything beyond the plan.
 
+0. Check that `git` and Python 3.10 or newer are installed (`git --version`, then `python --version` or `py --version` on Windows). If one is missing, tell Belhaj exactly how to install it, then continue.
 1. Clone the repo and create a branch:
 
    ```

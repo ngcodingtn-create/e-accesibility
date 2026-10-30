@@ -30,6 +30,8 @@ Idaraty's robots.txt **blocks AI crawlers**, so the agent must never fetch idara
 
 That is 3 to 6 files, which is enough. The agent never writes or edits procedure content. It only processes these files.
 
+The repository is public, so **the saved `.html` pages are not committed** (they are gitignored). Only `sources.csv`, with the URLs, is committed. Each teammate who runs the prototype saves their own copies of the same URLs.
+
 ## Design
 
 ```
@@ -112,7 +114,9 @@ birth_certificate: { derja: ["مضمون", "madhmoun", "extrait"], ar: ["مضم�
 - Gold set: `data/gold/questions.jsonl`, about 15 questions. That is 4 per procedure, mixing Derja in Arabic script, Arabizi, French and formal Arabic, plus 3 out-of-scope questions.
 - Each line looks like `{"qid":"q01","question":"…","lang":"aeb-latn","procedure_id":"passport","draft":true}`. Out-of-scope questions use `"procedure_id": null`.
 - Hit@k counts a question as a hit when any of its top-k chunks has the gold `procedure_id`.
-- Report Hit@1, Hit@5 and MRR, overall and per `lang`. For out-of-scope questions, report the share where `below_threshold` is true.
+- **Hit@1 and MRR are the headline numbers.** With only 3 procedures, Hit@5 is almost always 1.
+- Report Hit@1, Hit@3 and MRR, overall and per `lang`.
+- For out-of-scope questions, report the share where `below_threshold` is true.
 - Run it 3 ways: BM25 only, dense only, and hybrid with the glossary.
 
 ## Run it in parallel
@@ -122,7 +126,7 @@ birth_certificate: { derja: ["مضمون", "madhmoun", "extrait"], ar: ["مضم�
 - `src/rag/` containing `schema.py` (above) and empty stubs for every module, with the signatures above
 - `tests/fixtures/chunks.jsonl`: 6 obviously fake chunks (text starts with `FIXTURE`), 2 per procedure
 - `data/raw/sources.csv` with only the header row
-- `.gitignore` additions: `data/index/`, `data/processed/`
+- `.gitignore` additions: `data/index/`, `data/processed/`, `data/raw/*.html`
 - a short `README.md`
 
 Then ask Belhaj to save the pages (see above) **and do not wait for him.**

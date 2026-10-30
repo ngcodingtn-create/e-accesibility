@@ -50,7 +50,7 @@ Each service is a self-contained Python project (or JS for `web`) with its own R
 2. **Work only inside your own service folder.** Do not edit other services or `ai_docs/`.
 3. **Do not change an API contract on your own.** Propose the change in your pull request and ask the owner.
 4. **Work on a branch and open a pull request. Never push to `main`, and never merge.**
-5. **Do not crawl government websites.** Idaraty's robots.txt blocks AI crawlers. Source pages are saved by hand by the human owner and committed to the repo.
+5. **Do not crawl government websites.** Idaraty's robots.txt blocks AI crawlers. Source pages are saved by hand by the human owner. Their URLs are committed to the repo, but the pages themselves are not (the repo is public).
 6. **Use only licenses we can deploy.** Prefer Apache-2.0 or MIT models and libraries. Non-commercial (NC) models may be used only as evaluation baselines, and must be labeled as such.
 7. **Do not commit personal data or secrets.** No real citizen data, and no API keys. Use `.env` files, listed in `.gitignore`.
 
