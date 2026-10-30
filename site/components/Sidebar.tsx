@@ -67,7 +67,7 @@ export default function Sidebar() {
       <nav className="nav" aria-label="Site">
         {PAGES.map(p => item(p.href, p.num, p.short, p.label))}
         <div className="group label">Axes of work</div>
-        {AXES.map(a => item(`/axes/${a.slug}/`, a.n, a.n, a.name, a.owner.split(" · ")[0]))}
+        {AXES.map(a => item(`/axes/${a.slug}/`, a.n, a.n, a.name))}
         <div className="group label">Plan</div>
         {AFTER.map(p => item(p.href, p.num, p.short, p.label))}
       </nav>

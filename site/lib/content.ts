@@ -6,7 +6,6 @@ export type Axis = {
   n: string;
   name: string;
   arabic: string;
-  owner: string;
   stage: string;
   color: string;
   oneLine: string;
@@ -24,7 +23,6 @@ export const AXES: Axis[] = [
     n: "01",
     name: "Knowledge base",
     arabic: "قاعدة المعارف",
-    owner: "Belhaj",
     stage: "Prototype being built",
     color: "var(--kb)",
     oneLine: "Store the official rules with their source and dates, and find the ones that answer a Derja question.",
@@ -60,7 +58,6 @@ export const AXES: Axis[] = [
     n: "02",
     name: "Derja LLM",
     arabic: "النموذج اللغوي بالدارجة",
-    owner: "Med Amine",
     stage: "Design done, build starting",
     color: "var(--llm)",
     oneLine: "Understand the request, fetch the rules in force, and answer in Derja without inventing anything.",
@@ -90,7 +87,6 @@ export const AXES: Axis[] = [
     n: "03",
     name: "Text channel",
     arabic: "القناة النصية",
-    owner: "Med Amine",
     stage: "Design done, build starting",
     color: "var(--text)",
     oneLine: "Arabizi in, accessible text out.",
@@ -119,7 +115,6 @@ export const AXES: Axis[] = [
     n: "04",
     name: "Speech",
     arabic: "الكلام",
-    owner: "Ayhem · Med Amine",
     stage: "TTS prototype published",
     color: "var(--speech)",
     oneLine: "Derja speech in, Derja speech out.",
@@ -133,7 +128,7 @@ export const AXES: Axis[] = [
       },
       {
         value: "≈ 8.5 h",
-        label: "Training speech in Ayhem's Tn-TTS dataset (4,730 clips, measured). The VoxCPM2 fine-tune ran 147 full fine-tuning steps.",
+        label: "Training speech in the Tn-TTS dataset (4,730 clips, measured). The VoxCPM2 fine-tune ran 147 full fine-tuning steps.",
         source: { label: "Code-Quasar/Tn-TTS", url: "https://huggingface.co/datasets/Code-Quasar/Tn-TTS" },
       },
       {
@@ -155,7 +150,6 @@ export const AXES: Axis[] = [
     n: "05",
     name: "Sign language",
     arabic: "لغة الإشارة",
-    owner: "Med Amine",
     stage: "Scoping with partners",
     color: "var(--sign)",
     oneLine: "Tunisian Sign Language in, signing avatar out.",
@@ -185,7 +179,6 @@ export const AXES: Axis[] = [
     n: "06",
     name: "Improvement loop",
     arabic: "حلقة التحسين",
-    owner: "Med Amine",
     stage: "Design done",
     color: "var(--loop)",
     oneLine: "Measure every turn, fix the worst, ship only what is better.",
@@ -211,7 +204,7 @@ export const axisBySlug = (slug: string) => AXES.find(a => a.slug === slug);
 
 export const PHASES = [
   { name: "Research", note: "Six areas reviewed", state: "done" },
-  { name: "Architecture", note: "Axes, owners, interfaces", state: "done" },
+  { name: "Architecture", note: "Axes, interfaces", state: "done" },
   { name: "All axes in progress", note: "TTS published, RAG being built", state: "now" },
   { name: "Text spine", note: "Question to cited answer", state: "next" },
   { name: "Speech end to end", note: "ASR in, VoxCPM out", state: "next" },
@@ -219,17 +212,17 @@ export const PHASES = [
   { name: "Sign channel", note: "Small vocabulary, Deaf validators", state: "next" },
 ] as const;
 
-export const DECISIONS: { d: string; why: string; who: string }[] = [
-  { d: "Build the text path end to end first, then add speech, the loop and sign.", why: "Speech and sign only deliver an answer. Without a correct, grounded answer they are useless.", who: "All" },
-  { d: "Facts come only from retrieval, never from model weights.", why: "Rules change; retraining a model for every rule change is impossible.", who: "Med Amine" },
-  { d: "Index every passage with its validity dates.", why: "Current-text-only search answered 2.7% of date-specific legal questions; a version-aware index 98.3%.", who: "Belhaj" },
-  { d: "One text form: Derja in Arabic script, French and English in Latin script.", why: "Official documents use French terms; datasets disagree on scripts, so everything is mapped to one convention.", who: "All" },
-  { d: "Route intents with a small trained classifier.", why: "Zero-shot LLMs scored 29–53% on Tunisian intents; fine-tuned models about 80%.", who: "Med Amine" },
-  { d: "Fine-tune Whisper instead of using it off the shelf.", why: "Off-the-shelf large-v3: 82–94% word error rate on Tunisian sets.", who: "Med Amine" },
-  { d: "Sign: isolated signs from a small vocabulary, avatar from recorded signs.", why: "No LST dictionary or video corpus exists; generative sign models need large 3D corpora.", who: "Med Amine" },
-  { d: "Use licenses that allow a public service (Apache-2.0, MIT, CC-BY).", why: "VoxCPM, Qwen3 and Gemma 4 qualify. Non-commercial models are comparison baselines only.", who: "All" },
-  { d: "Self-host in Tunisia; consent before storing voice or video.", why: "Organic Law 2004-63 restricts transfers abroad and requires consent.", who: "All" },
-  { d: "No model ships unless it beats the live one, with no user group getting worse.", why: "Protects regional, gender, age and Deaf subgroups from silent regressions.", who: "Med Amine" },
+export const DECISIONS: { d: string; why: string }[] = [
+  { d: "Build the text path end to end first, then add speech, the loop and sign.", why: "Speech and sign only deliver an answer. Without a correct, grounded answer they are useless." },
+  { d: "Facts come only from retrieval, never from model weights.", why: "Rules change; retraining a model for every rule change is impossible." },
+  { d: "Index every passage with its validity dates.", why: "Current-text-only search answered 2.7% of date-specific legal questions; a version-aware index 98.3%." },
+  { d: "One text form: Derja in Arabic script, French and English in Latin script.", why: "Official documents use French terms; datasets disagree on scripts, so everything is mapped to one convention." },
+  { d: "Route intents with a small trained classifier.", why: "Zero-shot LLMs scored 29–53% on Tunisian intents; fine-tuned models about 80%." },
+  { d: "Fine-tune Whisper instead of using it off the shelf.", why: "Off-the-shelf large-v3: 82–94% word error rate on Tunisian sets." },
+  { d: "Sign: isolated signs from a small vocabulary, avatar from recorded signs.", why: "No LST dictionary or video corpus exists; generative sign models need large 3D corpora." },
+  { d: "Use licenses that allow a public service (Apache-2.0, MIT, CC-BY).", why: "VoxCPM, Qwen3 and Gemma 4 qualify. Non-commercial models are comparison baselines only." },
+  { d: "Self-host in Tunisia; consent before storing voice or video.", why: "Organic Law 2004-63 restricts transfers abroad and requires consent." },
+  { d: "No model ships unless it beats the live one, with no user group getting worse.", why: "Protects regional, gender, age and Deaf subgroups from silent regressions." },
 ];
 
 export const RISKS: { t: string; m: string }[] = [
@@ -259,8 +252,8 @@ export const SOURCES: { axis: string; items: Source[] }[] = [
     { label: "How well do LLMs understand Tunisian Arabic? (2025)", url: "https://arxiv.org/abs/2511.16683" },
   ]},
   { axis: "Speech", items: [
-    { label: "Ayhem's model: Code-Quasar/voxcpm-tn", url: "https://huggingface.co/Code-Quasar/voxcpm-tn" },
-    { label: "Ayhem's dataset: Code-Quasar/Tn-TTS", url: "https://huggingface.co/datasets/Code-Quasar/Tn-TTS" },
+    { label: "Derja voice model: Code-Quasar/voxcpm-tn", url: "https://huggingface.co/Code-Quasar/voxcpm-tn" },
+    { label: "Derja speech dataset: Code-Quasar/Tn-TTS", url: "https://huggingface.co/datasets/Code-Quasar/Tn-TTS" },
     { label: "VoxCPM (OpenBMB)", url: "https://github.com/OpenBMB/VoxCPM" },
     { label: "LinTO Tunisian ASR paper", url: "https://arxiv.org/abs/2504.02604" },
     { label: "Habibi-TTS (comparison baseline)", url: "https://github.com/SWivid/Habibi-TTS" },

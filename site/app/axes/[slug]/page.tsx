@@ -32,7 +32,6 @@ export default async function AxisPage({ params }: { params: Promise<{ slug: str
         arabic={a.arabic}
         lede={a.oneLine}
         fields={[
-          { label: "Owner", value: a.owner },
           { label: "Where it stands", value: a.stage },
           { label: "Status", value: null, stamp: true },
           { label: "Working docs", value: a.docs ? <a className="docs-link" href={a.docs.url}>{a.docs.label} ↗</a> : <span className="muted">Coming next</span> },

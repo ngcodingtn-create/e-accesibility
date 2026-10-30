@@ -28,14 +28,14 @@ export function BeforeAfter() {
 /* ---------- Progress matrix ---------- */
 type S = "done" | "now" | "next";
 const COLS = ["Research", "Design", "Data", "Prototype", "Evaluated"];
-const ROWS: { name: string; slug: string; owner: string; cells: [S, string][] }[] = [
-  { name: "Knowledge base", slug: "knowledge-base", owner: "Belhaj", cells: [["done", ""], ["done", "API contract"], ["now", "3 procedure pages"], ["now", "agent building /retrieve"], ["next", "Hit@1, MRR"]] },
-  { name: "Derja LLM", slug: "derja-llm", owner: "Med Amine", cells: [["done", ""], ["done", "route · cite · hand off"], ["next", "grounded examples"], ["now", "text spine"], ["next", "faithfulness"]] },
-  { name: "Text channel", slug: "text-channel", owner: "Med Amine", cells: [["done", ""], ["done", "one spelling convention"], ["now", "TArC corpus"], ["now", "normalizer"], ["next", "CER"]] },
-  { name: "Speech · voice", slug: "speech", owner: "Ayhem", cells: [["done", ""], ["done", ""], ["done", "4,730 clips · 8.5 h"], ["done", "model published"], ["now", "listening test"]] },
-  { name: "Speech · recognition", slug: "speech", owner: "Med Amine", cells: [["done", ""], ["done", ""], ["now", "≈ 106 h identified"], ["next", "Whisper fine-tune"], ["next", "WER"]] },
-  { name: "Sign language", slug: "sign-language", owner: "Med Amine", cells: [["done", ""], ["done", "60–100 signs scope"], ["now", "Deaf partners"], ["next", "sign classifier"], ["next", "comprehension"]] },
-  { name: "Improvement loop", slug: "improvement-loop", owner: "Med Amine", cells: [["done", ""], ["done", "gate rules"], ["next", "logged turns"], ["now", "eval gate in CI"], ["next", "—"]] },
+const ROWS: { name: string; slug: string; cells: [S, string][] }[] = [
+  { name: "Knowledge base", slug: "knowledge-base", cells: [["done", ""], ["done", "API contract"], ["now", "3 procedure pages"], ["now", "agent building /retrieve"], ["next", "Hit@1, MRR"]] },
+  { name: "Derja LLM", slug: "derja-llm", cells: [["done", ""], ["done", "route · cite · hand off"], ["next", "grounded examples"], ["now", "text spine"], ["next", "faithfulness"]] },
+  { name: "Text channel", slug: "text-channel", cells: [["done", ""], ["done", "one spelling convention"], ["now", "TArC corpus"], ["now", "normalizer"], ["next", "CER"]] },
+  { name: "Speech · voice", slug: "speech", cells: [["done", ""], ["done", ""], ["done", "4,730 clips · 8.5 h"], ["done", "model published"], ["now", "listening test"]] },
+  { name: "Speech · recognition", slug: "speech", cells: [["done", ""], ["done", ""], ["now", "≈ 106 h identified"], ["next", "Whisper fine-tune"], ["next", "WER"]] },
+  { name: "Sign language", slug: "sign-language", cells: [["done", ""], ["done", "60–100 signs scope"], ["now", "Deaf partners"], ["next", "sign classifier"], ["next", "comprehension"]] },
+  { name: "Improvement loop", slug: "improvement-loop", cells: [["done", ""], ["done", "gate rules"], ["next", "logged turns"], ["now", "eval gate in CI"], ["next", "—"]] },
 ];
 
 export function ProgressMatrix() {
@@ -46,7 +46,7 @@ export function ProgressMatrix() {
         {COLS.map(c => <span key={c} className="h">{c}</span>)}
         {ROWS.map(r => (
           <div key={r.name} style={{ display: "contents" }} role="row">
-            <div className="row"><Link href={`/axes/${r.slug}/`}>{r.name}</Link><span>{r.owner}</span></div>
+            <div className="row"><Link href={`/axes/${r.slug}/`}>{r.name}</Link></div>
             {r.cells.map(([s, note], k) => (
               <div key={k} className={`cell ${s}`} role="cell" aria-label={`${COLS[k]}: ${s === "done" ? "done" : s === "now" ? "in progress" : "not started"}${note ? `, ${note}` : ""}`}>
                 {s === "done" && !note ? "✓" : note}
@@ -66,19 +66,19 @@ export function ProgressMatrix() {
 
 /* ---------- Evidence ---------- */
 const EVIDENCE = [
-  { n: "2.29 B", what: "Derja voice model, published", where: "huggingface.co/Code-Quasar/voxcpm-tn", url: "https://huggingface.co/Code-Quasar/voxcpm-tn", who: "Ayhem" },
-  { n: "8.5 h", what: "Tunisian speech dataset, 4,730 clips", where: "huggingface.co/datasets/Code-Quasar/Tn-TTS", url: "https://huggingface.co/datasets/Code-Quasar/Tn-TTS", who: "Ayhem" },
-  { n: "2", what: "API contracts agreed between axes", where: "ai_docs/rag/API.md · ai_docs/tts/API.md", url: `${REPO}/tree/main/ai_docs`, who: "Team" },
-  { n: "4", what: "Parallel coding agents briefed for the RAG prototype", where: "ai_docs/rag/PLAN.md", url: `${REPO}/blob/main/ai_docs/rag/PLAN.md`, who: "Belhaj" },
-  { n: "6", what: "Research areas reviewed, with sources", where: "/sources", url: "/sources/", who: "Team" },
-  { n: "1", what: "Public repository with automatic site deploy", where: "github.com/ngcodingtn-create/e-accesibility", url: REPO, who: "Med Amine" },
+  { n: "2.29 B", what: "Derja voice model, published", where: "huggingface.co/Code-Quasar/voxcpm-tn", url: "https://huggingface.co/Code-Quasar/voxcpm-tn" },
+  { n: "8.5 h", what: "Tunisian speech dataset, 4,730 clips", where: "huggingface.co/datasets/Code-Quasar/Tn-TTS", url: "https://huggingface.co/datasets/Code-Quasar/Tn-TTS" },
+  { n: "2", what: "API contracts agreed between axes", where: "ai_docs/rag/API.md · ai_docs/tts/API.md", url: `${REPO}/tree/main/ai_docs` },
+  { n: "4", what: "Parallel coding agents briefed for the RAG prototype", where: "ai_docs/rag/PLAN.md", url: `${REPO}/blob/main/ai_docs/rag/PLAN.md` },
+  { n: "6", what: "Research areas reviewed, with sources", where: "/sources", url: "/sources/" },
+  { n: "1", what: "Public repository with automatic site deploy", where: "github.com/ngcodingtn-create/e-accesibility", url: REPO },
 ];
 
 export function Evidence() {
   return (
     <div className="evidence">
       {EVIDENCE.map(e => {
-        const inner = (<><span className="who">{e.who}</span><span className="n">{e.n}</span><span className="what">{e.what}</span><span className="where">{e.where} ↗</span></>);
+        const inner = (<><span className="n">{e.n}</span><span className="what">{e.what}</span><span className="where">{e.where} ↗</span></>);
         return e.url.startsWith("/")
           ? <Link key={e.what} href={e.url} className="ev">{inner}</Link>
           : <a key={e.what} href={e.url} className="ev">{inner}</a>;
@@ -152,31 +152,34 @@ export function RiskMap() {
 }
 
 /* ---------- Gantt ---------- */
-const MONTHS = ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+// Days from 1 September 2026; the final review falls in November.
+const MONTHS: [string, number, number][] = [["September", 0, 30], ["October", 30, 61], ["November", 61, 91]];
 const TASKS: { t: string; from: number; to: number; s: S; c: string }[] = [
-  { t: "Research", from: 0, to: 1.9, s: "done", c: "var(--ink)" },
-  { t: "Architecture + contracts", from: 1.2, to: 2, s: "done", c: "var(--ink)" },
-  { t: "Voice model (VoxCPM)", from: 0.5, to: 2.6, s: "now", c: "var(--speech)" },
-  { t: "Knowledge base prototype", from: 1.9, to: 3, s: "now", c: "var(--kb)" },
-  { t: "Text spine: LLM + normalizer", from: 2, to: 4, s: "now", c: "var(--llm)" },
-  { t: "Speech recognition", from: 3, to: 5.5, s: "next", c: "var(--speech)" },
-  { t: "Improvement loop", from: 4, to: 6.5, s: "next", c: "var(--loop)" },
-  { t: "Sign channel", from: 4.5, to: 8, s: "next", c: "var(--sign)" },
-  { t: "Evaluation + report", from: 7, to: 10, s: "next", c: "var(--ink-3)" },
+  { t: "Research", from: 0, to: 50, s: "done", c: "var(--ink)" },
+  { t: "Architecture + contracts", from: 35, to: 59, s: "done", c: "var(--ink)" },
+  { t: "Voice model (VoxCPM)", from: 9, to: 78, s: "now", c: "var(--speech)" },
+  { t: "Knowledge base prototype", from: 57, to: 70, s: "now", c: "var(--kb)" },
+  { t: "Text spine: LLM + normalizer", from: 59, to: 77, s: "now", c: "var(--llm)" },
+  { t: "Speech recognition", from: 64, to: 82, s: "next", c: "var(--speech)" },
+  { t: "Improvement loop: eval gate", from: 70, to: 84, s: "next", c: "var(--loop)" },
+  { t: "Sign channel pilot", from: 70, to: 86, s: "next", c: "var(--sign)" },
+  { t: "Evaluation + demo", from: 80, to: 90, s: "next", c: "var(--ink-3)" },
 ];
-const TODAY = 1 + 30 / 31; // 30 October
+const TODAY = 59; // 30 October
 
 export function Gantt() {
-  const W = 960, L = 230, R = 950, top = 34, rowH = 34;
-  const x = (m: number) => L + ((R - L) * m) / MONTHS.length;
-  const H = top + TASKS.length * rowH + 30;
+  const W = 960, L = 240, R = 950, top = 34, rowH = 34, END = 91;
+  const x = (d: number) => L + ((R - L) * d) / END;
+  const rowsH = (TASKS.length + 1) * rowH;
+  const H = top + rowsH + 30;
+  const ry = top + TASKS.length * rowH;
   return (
     <div className="sheet scroll-x">
-      <svg className="dia" viewBox={`0 0 ${W} ${H}`} style={{ minWidth: 720 }} role="img" aria-label="Indicative plan from September 2026 to June 2027, with today marked on 30 October">
-        {MONTHS.map((m, k) => (
+      <svg className="dia" viewBox={`0 0 ${W} ${H}`} style={{ minWidth: 680 }} role="img" aria-label="Plan from September to the final review in November 2026, with today marked on 30 October">
+        {MONTHS.map(([m, a, b], k) => (
           <g key={m}>
-            <rect x={x(k)} y={top - 6} width={x(k + 1) - x(k)} height={TASKS.length * rowH + 8} fill={k % 2 ? "var(--paper)" : "transparent"} />
-            <text x={(x(k) + x(k + 1)) / 2} y={18} textAnchor="middle" className="t-label">{m}</text>
+            <rect x={x(a)} y={top - 6} width={x(b) - x(a)} height={rowsH + 6} fill={k % 2 ? "var(--paper)" : "transparent"} />
+            <text x={(x(a) + x(b)) / 2} y={18} textAnchor="middle" className="t-label">{m}</text>
           </g>
         ))}
         {TASKS.map((t, k) => {
@@ -189,10 +192,13 @@ export function Gantt() {
             </g>
           );
         })}
+        <text x={0} y={ry + 19} style={{ fontSize: 15.5, fontWeight: 700, fill: "var(--flag)" }}>Final review</text>
+        <rect x={x(61)} y={ry + 5} width={x(91) - x(61)} height={18} fill="color-mix(in srgb, var(--flag) 14%, transparent)" stroke="var(--flag)" strokeWidth={1.5} />
+        <text x={(x(61) + x(91)) / 2} y={ry + 19} textAnchor="middle" style={{ fontSize: 13, fontWeight: 600, fill: "var(--flag)" }}>November</text>
         <line x1={x(TODAY)} x2={x(TODAY)} y1={top - 6} y2={H - 22} stroke="var(--flag)" strokeWidth={2} />
         <text x={x(TODAY)} y={H - 6} textAnchor="middle" style={{ fontSize: 13, fontWeight: 600, fill: "var(--flag)" }}>Today · 30 Oct</text>
       </svg>
-      <p className="small muted" style={{ marginTop: 8 }}>Indicative plan; solid = done or in progress, dashed = planned. Final review date to confirm.</p>
+      <p className="small muted" style={{ marginTop: 8 }}>Solid = done or in progress, dashed = planned. Final review in November.</p>
     </div>
   );
 }

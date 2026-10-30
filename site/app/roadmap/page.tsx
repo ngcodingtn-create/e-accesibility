@@ -27,10 +27,10 @@ export default function Roadmap() {
       <Section title="Decisions, and the evidence behind them">
         <div className="scroll-x sheet" style={{ padding: 0 }}>
           <table className="ledger">
-            <thead><tr><th>No.</th><th>Decision</th><th>Why</th><th>Affects</th></tr></thead>
+            <thead><tr><th>No.</th><th>Decision</th><th>Why</th></tr></thead>
             <tbody>
               {DECISIONS.map((d, k) => (
-                <tr key={d.d}><td className="num">D{k + 1}</td><td><b>{d.d}</b></td><td className="muted">{d.why}</td><td>{d.who}</td></tr>
+                <tr key={d.d}><td className="num">D{k + 1}</td><td><b>{d.d}</b></td><td className="muted">{d.why}</td></tr>
               ))}
             </tbody>
           </table>

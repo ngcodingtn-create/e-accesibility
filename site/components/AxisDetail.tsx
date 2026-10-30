@@ -92,7 +92,7 @@ function BuildSwimlane() {
             {cells.map((c, i) => c ? <span key={i} className={`bar${who === "Main agent" ? " dark" : ""}`}>{c}</span> : <span key={i} />)}
           </div>
         ))}
-        <b style={{ color: "var(--text)" }}>Belhaj</b>
+        <b style={{ color: "var(--text)" }}>By hand</b>
         <span className="bar human" style={{ gridColumn: "span 2" }}>Saves 3 pages from Idaraty by hand (5 min) while the agents build</span>
         <span className="bar human">Reviews test questions</span>
       </div>
@@ -229,7 +229,7 @@ function TextChannel() {
 function Speech() {
   return (
     <>
-      <Section title="Speech synthesis · Ayhem" kicker="VoxCPM2 fine-tuned on Derja, published on Hugging Face" intro={<p>VoxCPM2 (2.3 B parameters) fine-tuned by Ayhem, published as <a href="https://huggingface.co/Code-Quasar/voxcpm-tn">Code-Quasar/voxcpm-tn</a>.</p>}>
+      <Section title="Speech synthesis" kicker="VoxCPM2 fine-tuned on Derja, published on Hugging Face" intro={<p>VoxCPM2 (2.3 B parameters) fine-tuned on Derja, published as <a href="https://huggingface.co/Code-Quasar/voxcpm-tn">Code-Quasar/voxcpm-tn</a>.</p>}>
         <Flow color="var(--speech)" nodes={[
           { t: "Derja text", s: "starts with “(Tunisian Dialect)”" },
           { t: "Language model", s: "plans words and rhythm" },

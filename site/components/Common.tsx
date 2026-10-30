@@ -18,20 +18,19 @@ export function Timeline() {
   );
 }
 
-/** Ledger of the six axes with owner, stage and a stamp. */
+/** Ledger of the six axes with stage and a stamp. */
 export function StatusBoard() {
   return (
     <div className="scroll-x sheet" style={{ padding: 0 }}>
       <table className="ledger">
         <thead>
-          <tr><th>No.</th><th>Axis</th><th>Owner</th><th>Where it stands</th><th>Status</th></tr>
+          <tr><th>No.</th><th>Axis</th><th>Where it stands</th><th>Status</th></tr>
         </thead>
         <tbody>
           {AXES.map(a => (
             <tr key={a.slug}>
               <td className="num">{a.n}</td>
               <td><span className="swatch" style={{ ["--c" as string]: a.color }} /><Link href={`/axes/${a.slug}/`}>{a.name}</Link><div className="small muted">{a.oneLine}</div></td>
-              <td>{a.owner}</td>
               <td>{a.stage}</td>
               <td><Stamp small /></td>
             </tr>
