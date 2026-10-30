@@ -14,6 +14,14 @@ College project. A citizen asks about an administrative procedure in Tunisian De
 | Belhaj | Knowledge base and retrieval (RAG) | `services/rag/` |
 | Med Amine | Derja LLM, Arabizi normalizer, speech recognition, sign channel, accessible UI, MLOps loop, integration | `services/llm/`, `services/asr/`, `services/web/` |
 
+## Project site
+
+**https://ngcodingtn-create.github.io/e-accesibility/**: architecture, the six axes of work and where each stands. The source is in `site/` (Next.js, static export). Every push to `main` that touches `site/` redeploys it.
+
+```bash
+cd site && npm install && npm run dev   # http://localhost:3010
+```
+
 ## Where to start
 
 - **Humans and AI agents:** read [ai_docs/README.md](ai_docs/README.md) first.

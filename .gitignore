@@ -33,3 +33,10 @@ Thumbs.db
 
 # Saved government pages: not redistributed (public repo)
 services/rag/data/raw/*.html
+
+# Local tool config
+.claude/
+site/.next/
+site/out/
+site/node_modules/
+site/next-env.d.ts
